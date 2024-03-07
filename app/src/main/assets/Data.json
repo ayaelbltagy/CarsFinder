@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "model": 2021,
     "plate_number": "ABC 123",
     "brand": "Honda",
@@ -8,14 +9,16 @@
     "color": "RED"
   },
   {
+    "id": 2,
     "model": 2020,
     "plate_number": "EFG 321",
     "brand": "Hyundai",
     "unit_price": 50.5,
     "currency": "EGP",
-    "color":"BLUE"
+    "color": "BLUE"
   },
   {
+    "id": 3,
     "model": 2021,
     "plate_number": "XYZ 313",
     "brand": "MG",
@@ -24,6 +27,7 @@
     "color": "BLACK"
   },
   {
+    "id": "4",
     "model": 2022,
     "plate_number": "ABC 123",
     "brand": "Opel",

@@ -2,6 +2,7 @@ package com.example.carfinder.reponse
 
 
 data class ModelResponse(
+    val id: Int,
     val model: Int,
     val plate_number: String,
     val brand: String,
