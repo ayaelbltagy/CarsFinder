@@ -22,12 +22,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CarFinderTheme {
-                navigatePage()
-
+               navigatePage()
             }
         }
     }
-
 
 }
 
@@ -42,8 +40,7 @@ fun navigatePage() {
         startDestination = "sample_data"
     ) {
         composable("sample_data") {
-            val context = LocalContext.current
-            SearchScreen(navController = navHostController, viewModel = SearchViewModel(context))
+             SearchScreen(navController = navHostController, viewModel = SearchViewModel(LocalContext.current))
 
         }
         composable("details/{item}",

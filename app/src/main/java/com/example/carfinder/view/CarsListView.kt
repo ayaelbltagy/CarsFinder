@@ -46,7 +46,7 @@ import com.google.gson.reflect.TypeToken
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun SearchScreen(navController: NavController, viewModel: SearchViewModel) {
-    val searchResults by viewModel.searchResults.collectAsStateWithLifecycle()
+    val searchResults by viewModel.getSearchResult().collectAsStateWithLifecycle()
 
     SearchScreen(
         navController = navController,

@@ -16,41 +16,50 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class SearchViewModel(context: Context) : ViewModel() {
     var searchQuery by mutableStateOf("")
         private set
 
 
-    private fun getJsonDataFromAsset(context: Context, data: String): String {
-        return context.assets.open(data).bufferedReader().use { it.readText() }
-    }
-
     private val dataFileString = getJsonDataFromAsset(context, "Data.json")
     private val gson = Gson()
     private val listSampleType = object : TypeToken<List<ModelResponse>>() {}.type
-    var sampleData: List<ModelResponse> = gson.fromJson(dataFileString, listSampleType)
-
+    private var sampleData: List<ModelResponse> = gson.fromJson(dataFileString, listSampleType)
     private val carsFlow = flowOf(sampleData)
 
+    init {
+        getSearchResult()
+    }
+    fun getSearchResult() : StateFlow<List<ModelResponse>>{
+        lateinit var searchResults: StateFlow<List<ModelResponse>>
+        viewModelScope.launch {
+              searchResults =
+                snapshotFlow { searchQuery }
+                    .combine(carsFlow) { searchQuery, cars ->
+                        when {
+                            searchQuery.isNotEmpty() -> cars.filter { car ->
+                                car.color.contains(searchQuery, ignoreCase = true) || car.unit_price.contains(searchQuery, ignoreCase = true)
 
-    val searchResults: StateFlow<List<ModelResponse>> =
-        snapshotFlow { searchQuery }
-            .combine(carsFlow) { searchQuery, cars ->
-                when {
-                    searchQuery.isNotEmpty() -> cars.filter { car ->
-                        car.color.contains(searchQuery, ignoreCase = true) || car.unit_price.contains(searchQuery, ignoreCase = true)
+                            }
 
-                    }
+                            else -> cars
 
-                    else -> cars
+                        }
+                    }.stateIn(
+                        scope = viewModelScope,
+                        initialValue = emptyList(),
+                        started = SharingStarted.WhileSubscribed(5_000)
+                    )
+        }
+        return searchResults
+    }
 
-                }
-            }.stateIn(
-                scope = viewModelScope,
-                initialValue = emptyList(),
-                started = SharingStarted.WhileSubscribed(5_000)
-            )
+
+    private fun getJsonDataFromAsset(context: Context, data: String): String {
+        return context.assets.open(data).bufferedReader().use { it.readText() }
+    }
 
     fun onSearchQueryChange(newQuery: String) {
         searchQuery = newQuery
