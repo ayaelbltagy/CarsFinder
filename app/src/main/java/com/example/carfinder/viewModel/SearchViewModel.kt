@@ -32,34 +32,6 @@ class SearchViewModel(context: Context) : ViewModel() {
     var sampleData: List<ModelResponse> = gson.fromJson(dataFileString, listSampleType)
 
     private val carsFlow = flowOf(sampleData)
-//    private val carsFlow = flowOf(
-//        listOf(
-//            ModelResponse(
-//                model = 1,
-//                plate_number = "test",
-//                brand = "momk",
-//                unit_price = "",
-//                currency = "",
-//                color = "",
-//            ),
-//            ModelResponse(
-//                model = 2,
-//                plate_number = "test",
-//                brand = "momk",
-//                unit_price = "",
-//                currency = "",
-//                color = "",
-//            ),
-//            ModelResponse(
-//                model = 3,
-//                plate_number = "test",
-//                brand = "momk",
-//                unit_price = "",
-//                currency = "",
-//                color = "red",
-//            )
-//        )
-//    )
 
 
     val searchResults: StateFlow<List<ModelResponse>> =
@@ -67,7 +39,7 @@ class SearchViewModel(context: Context) : ViewModel() {
             .combine(carsFlow) { searchQuery, cars ->
                 when {
                     searchQuery.isNotEmpty() -> cars.filter { car ->
-                        car.color.contains(searchQuery, ignoreCase = true)
+                        car.color.contains(searchQuery, ignoreCase = true) || car.unit_price.contains(searchQuery, ignoreCase = true)
 
                     }
 

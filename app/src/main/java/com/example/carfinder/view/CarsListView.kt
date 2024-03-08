@@ -1,6 +1,7 @@
 package com.example.carfinder.view
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,6 +26,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -35,8 +37,10 @@ import androidx.navigation.NavController
 import com.example.carfinder.R
 import com.google.gson.Gson
 import com.example.carfinder.reponse.ModelResponse
+import com.example.carfinder.reponse.ResponseError
 import com.example.carfinder.ui.theme.Purple80
 import com.example.carfinder.viewModel.SearchViewModel
+import com.google.gson.reflect.TypeToken
 
 
 @SuppressLint("StateFlowValueCalledInComposition")
@@ -68,7 +72,7 @@ fun SearchScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(100.dp)
+                .height(90.dp)
                 .background(Purple80),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
@@ -102,6 +106,9 @@ fun SearchScreen(
                                 contentDescription = "Clear search"
                             )
                         }
+                    }
+                    else{
+                        keyboardController?.hide()
                     }
                 },
                 content = {},
@@ -178,23 +185,33 @@ fun CarListItem(
         }
     }
 }
-
+@OptIn( ExperimentalComposeUiApi::class)
 @Composable
 fun MovieListEmptyState(
     modifier: Modifier = Modifier
 ) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val jsonString = readJsonFromAssets(LocalContext.current, "Error.json")
+    val error = parseJsonToModel(jsonString)
+    keyboardController?.hide()
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.fillMaxSize()
     ) {
         Text(
-            text = "No cars found",
+            text = error!!.status.message,
             style = MaterialTheme.typography.titleSmall
         )
-        Text(
-            text = "We will add it soon!",
-            style = MaterialTheme.typography.bodyLarge
-        )
+
     }
+}
+
+private fun readJsonFromAssets(context: Context, fileName: String): String {
+    return context.assets.open(fileName).bufferedReader().use { it.readText() }
+}
+
+private fun parseJsonToModel(jsonString: String): ResponseError {
+    val gson = Gson()
+    return gson.fromJson(jsonString, object : TypeToken<ResponseError>() {}.type)
 }
