@@ -22,8 +22,6 @@ import kotlinx.coroutines.launch
 
 class SearchViewModel(context: Context) : ViewModel() {
 
-
-
     var searchQuery by mutableStateOf("")
         private set
 
@@ -34,9 +32,7 @@ class SearchViewModel(context: Context) : ViewModel() {
     private var sampleData: List<ModelResponse> = gson.fromJson(dataFileString, listSampleType)
     private val carsFlow = flowOf(sampleData)
 
-    init {
-        getSearchResult()
-    }
+
     fun getSearchResult() : StateFlow<List<ModelResponse>>{
         lateinit var searchResults: StateFlow<List<ModelResponse>>
         viewModelScope.launch{
