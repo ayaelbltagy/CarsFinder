@@ -33,15 +33,16 @@ class SearchViewModel(context: Context) : ViewModel() {
     private val carsFlow = flowOf(sampleData)
 
 
-    fun getSearchResult() : StateFlow<List<ModelResponse>>{
+    fun getSearchResult(): StateFlow<List<ModelResponse>> {
         lateinit var searchResults: StateFlow<List<ModelResponse>>
-        viewModelScope.launch{
-              searchResults =
+        viewModelScope.launch {
+            searchResults =
                 snapshotFlow { searchQuery }
                     .combine(carsFlow) { searchQuery, cars ->
                         when {
                             searchQuery.isNotEmpty() -> cars.filter { car ->
-                                car.color.contains(searchQuery, ignoreCase = true) || car.unit_price.contains(searchQuery, ignoreCase = true)
+                                car.color.contains(searchQuery, ignoreCase = true)
+                                        || car.unit_price.equals(searchQuery.toDouble())
 
                             }
 

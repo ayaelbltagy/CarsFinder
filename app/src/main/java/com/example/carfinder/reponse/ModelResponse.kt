@@ -6,7 +6,7 @@ data class ModelResponse(
     val model: Int,
     val plate_number: String,
     val brand: String,
-    val unit_price: String,
+    val unit_price: Double,
     val currency: String,
     val color: String,
 )
