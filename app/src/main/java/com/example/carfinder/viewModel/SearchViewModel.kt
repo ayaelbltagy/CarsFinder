@@ -1,10 +1,11 @@
 package com.example.carfinder.viewModel
 
 import android.content.Context
-import android.os.Bundle
 import android.util.Log
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
@@ -20,6 +21,9 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class SearchViewModel(context: Context) : ViewModel() {
+
+
+
     var searchQuery by mutableStateOf("")
         private set
 
@@ -66,4 +70,5 @@ class SearchViewModel(context: Context) : ViewModel() {
         searchQuery = newQuery
         Log.i("tagMe", newQuery)
     }
+
 }
