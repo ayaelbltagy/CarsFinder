@@ -43,17 +43,17 @@ import com.example.carfinder.viewModel.SearchViewModel
 import com.google.gson.reflect.TypeToken
 
 
-@SuppressLint("StateFlowValueCalledInComposition")
+@SuppressLint("StateFlowValueCalledInComposition", "SuspiciousIndentation")
 @Composable
 fun SearchScreen(navController: NavController, viewModel: SearchViewModel) {
     val searchResults by viewModel.getSearchResult().collectAsStateWithLifecycle()
 
-    SearchScreen(
-        navController = navController,
-        searchQuery = viewModel.searchQuery,
-        searchResults = searchResults,
-        onSearchQueryChange = { viewModel.onSearchQueryChange(it) }
-    )
+        SearchScreen(
+            navController = navController,
+            searchQuery = viewModel.searchQuery,
+            searchResults = searchResults,
+            onSearchQueryChange = { viewModel.onSearchQueryChange(it) }
+     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
@@ -117,8 +117,8 @@ fun SearchScreen(
                 tonalElevation = 0.dp
             )
         }
-        if (searchResults.isEmpty()) {
-            MovieListEmptyState()
+        if (searchResults.isEmpty() && searchQuery.isNotEmpty()) {
+            emptyState()
         } else {
             LazyColumn(
                 modifier = Modifier.fillMaxWidth(),
@@ -187,7 +187,7 @@ fun CarListItem(
 }
 @OptIn( ExperimentalComposeUiApi::class)
 @Composable
-fun MovieListEmptyState(
+fun emptyState(
     modifier: Modifier = Modifier
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current

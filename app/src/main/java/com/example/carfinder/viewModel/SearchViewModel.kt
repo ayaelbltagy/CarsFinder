@@ -1,6 +1,7 @@
 package com.example.carfinder.viewModel
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,7 +35,7 @@ class SearchViewModel(context: Context) : ViewModel() {
     }
     fun getSearchResult() : StateFlow<List<ModelResponse>>{
         lateinit var searchResults: StateFlow<List<ModelResponse>>
-        viewModelScope.launch {
+        viewModelScope.launch{
               searchResults =
                 snapshotFlow { searchQuery }
                     .combine(carsFlow) { searchQuery, cars ->
@@ -50,7 +51,7 @@ class SearchViewModel(context: Context) : ViewModel() {
                     }.stateIn(
                         scope = viewModelScope,
                         initialValue = emptyList(),
-                        started = SharingStarted.WhileSubscribed(5_000)
+                        started = SharingStarted.WhileSubscribed(5000)
                     )
         }
         return searchResults

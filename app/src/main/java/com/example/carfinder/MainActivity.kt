@@ -1,6 +1,7 @@
 package com.example.carfinder
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
@@ -14,6 +15,7 @@ import com.example.carfinder.reponse.ModelResponse
 import com.example.carfinder.ui.theme.CarFinderTheme
 import com.example.carfinder.view.CarDataDetails
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.lifecycleScope
 import com.example.carfinder.view.SearchScreen
 import com.example.carfinder.viewModel.SearchViewModel
 
@@ -22,12 +24,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CarFinderTheme {
-               navigatePage()
+
+                  navigatePage()
             }
         }
     }
 
 }
+
+
+
 
 
 
@@ -40,7 +46,11 @@ fun navigatePage() {
         startDestination = "sample_data"
     ) {
         composable("sample_data") {
-             SearchScreen(navController = navHostController, viewModel = SearchViewModel(LocalContext.current))
+
+            SearchScreen(
+                navController = navHostController,
+                viewModel = SearchViewModel(LocalContext.current)
+            )
 
         }
         composable("details/{item}",
