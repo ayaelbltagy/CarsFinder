@@ -72,6 +72,10 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.9'
     //Material Design 3
     implementation("androidx.compose.material3:material3:1.1.2")
+    // compose runtime
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.4.0-beta02")
+    // compose view model
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
+
 
 }
