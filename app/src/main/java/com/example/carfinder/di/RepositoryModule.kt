@@ -17,17 +17,16 @@ import dagger.hilt.components.SingletonComponent
 object RepositoryModule {
 
     @Provides
-    fun providedb(@ApplicationContext appContext: Context): List<ModelResponse> {
+    fun provideCarsList(@ApplicationContext appContext: Context): List<ModelResponse> {
         val dataFileString = getJsonDataFromAsset(appContext, "Data.json")
         val gson = Gson()
         val listSampleType = object : TypeToken<List<ModelResponse>>() {}.type
-        val sampleData: List<ModelResponse> = gson.fromJson(dataFileString, listSampleType)
-        return sampleData
+        val response: List<ModelResponse> = gson.fromJson(dataFileString, listSampleType)
+        return response
     }
 
     private fun getJsonDataFromAsset(context: Context, data: String): String {
         return context.assets.open(data).bufferedReader().use { it.readText() }
-
     }
 
 
