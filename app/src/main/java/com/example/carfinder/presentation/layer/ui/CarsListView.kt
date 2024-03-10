@@ -1,4 +1,4 @@
-package com.example.carfinder.view
+package com.example.carfinder.presentation.layer.ui
 
 import android.content.Context
 import androidx.compose.runtime.Composable
@@ -23,8 +23,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.carfinder.R
 import com.google.gson.Gson
-import com.example.carfinder.reponse.ModelResponse
-import com.example.carfinder.reponse.ResponseError
+import com.example.carfinder.domain.ModelResponse
+import com.example.carfinder.domain.ResponseError
 import com.google.gson.reflect.TypeToken
 
 

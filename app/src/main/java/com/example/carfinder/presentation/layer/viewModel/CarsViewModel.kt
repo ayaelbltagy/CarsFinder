@@ -1,9 +1,9 @@
-package com.example.carfinder.viewModel
+package com.example.carfinder.presentation.layer.viewModel
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.carfinder.reponse.ModelResponse
+import com.example.carfinder.domain.ModelResponse
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

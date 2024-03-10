@@ -1,4 +1,4 @@
-package com.example.carfinder.ui.theme
+package com.example.carfinder.presentation.layer.theme
 
 import androidx.compose.ui.graphics.Color
 

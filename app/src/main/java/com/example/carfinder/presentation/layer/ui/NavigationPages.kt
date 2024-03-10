@@ -1,4 +1,4 @@
-package com.example.carfinder.view
+package com.example.carfinder.presentation.layer.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,9 +33,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.carfinder.reponse.ModelResponse
-import com.example.carfinder.ui.theme.Purple80
-import com.example.carfinder.viewModel.CarsViewModel
+import com.example.carfinder.domain.ModelResponse
+import com.example.carfinder.presentation.layer.theme.Purple80
+import com.example.carfinder.presentation.layer.viewModel.CarsViewModel
 import com.google.gson.Gson
 
 @Composable

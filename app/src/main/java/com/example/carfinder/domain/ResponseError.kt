@@ -1,4 +1,4 @@
-package com.example.carfinder.reponse
+package com.example.carfinder.domain
 
 data class ResponseError(
     val status: Status,

@@ -1,4 +1,4 @@
-package com.example.carfinder.view
+package com.example.carfinder.presentation.layer.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.carfinder.R
 import androidx.compose.material3.Text
-import com.example.carfinder.reponse.ModelResponse
-import com.example.carfinder.ui.theme.Purple80
+import com.example.carfinder.domain.ModelResponse
+import com.example.carfinder.presentation.layer.theme.Purple80
 
 @Composable
 fun CarDataDetails(data: ModelResponse) {

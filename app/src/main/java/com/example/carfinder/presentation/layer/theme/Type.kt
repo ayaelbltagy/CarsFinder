@@ -1,4 +1,4 @@
-package com.example.carfinder.ui.theme
+package com.example.carfinder.presentation.layer.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
