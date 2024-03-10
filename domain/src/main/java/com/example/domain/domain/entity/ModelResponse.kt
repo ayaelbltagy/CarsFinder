@@ -1,4 +1,4 @@
-package com.example.carfinder.domain
+package com.example.domain.domain.entity
 
 
 data class ModelResponse(

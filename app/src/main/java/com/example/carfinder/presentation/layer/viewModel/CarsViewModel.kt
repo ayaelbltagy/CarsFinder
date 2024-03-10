@@ -1,9 +1,12 @@
 package com.example.carfinder.presentation.layer.viewModel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.carfinder.domain.ModelResponse
+import com.example.domain.domain.entity.ModelResponse
+import com.example.domain.domain.useCase.CarsUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,9 +16,12 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@HiltViewModel
 @OptIn(FlowPreview::class)
-class CarsViewModel : ViewModel() {
+class CarsViewModel @Inject constructor (private val useCase: CarsUseCase): ViewModel() {
     private val _searchText = MutableStateFlow("")
     val searchText = _searchText.asStateFlow()
 
@@ -40,6 +46,16 @@ class CarsViewModel : ViewModel() {
             "BLUE"
         ),
     )
+
+    init {
+        getList()
+    }
+
+    fun getList(){
+        viewModelScope.launch {
+            Log.i("test", useCase().get(0).brand)
+        }
+    }
 
     private val _cars = MutableStateFlow(carsList)
     val cars = searchText

@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.carfinder.R
 import androidx.compose.material3.Text
-import com.example.carfinder.domain.ModelResponse
 import com.example.carfinder.presentation.layer.theme.Purple80
+import com.example.domain.domain.entity.ModelResponse
 
 @Composable
 fun CarDataDetails(data: ModelResponse) {

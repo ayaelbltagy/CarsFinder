@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -76,6 +78,12 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.4.0-beta02")
     // compose view model
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
+    //hilt
+    implementation 'com.google.dagger:hilt-android:2.46'
+    kapt 'com.google.dagger:hilt-compiler:2.46'
+
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
 
 
 }

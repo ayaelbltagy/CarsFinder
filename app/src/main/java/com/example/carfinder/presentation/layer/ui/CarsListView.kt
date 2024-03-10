@@ -23,8 +23,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.carfinder.R
 import com.google.gson.Gson
-import com.example.carfinder.domain.ModelResponse
 import com.example.carfinder.domain.ResponseError
+import com.example.domain.domain.entity.ModelResponse
 import com.google.gson.reflect.TypeToken
 
 

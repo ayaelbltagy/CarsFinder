@@ -33,9 +33,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.carfinder.domain.ModelResponse
 import com.example.carfinder.presentation.layer.theme.Purple80
 import com.example.carfinder.presentation.layer.viewModel.CarsViewModel
+import com.example.domain.domain.entity.ModelResponse
 import com.google.gson.Gson
 
 @Composable
