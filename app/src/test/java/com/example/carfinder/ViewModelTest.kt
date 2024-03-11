@@ -74,6 +74,13 @@ class ViewModelTest {
         assertEquals(false, result.value.equals(viewModel.getList()))
     }
 
+    @Test
+    fun `testing search txt`() = runBlockingTest {
+        val result = MutableStateFlow("search")
+        viewModel.searchText = result.asStateFlow()
+        assertEquals(false, viewModel.searchText.equals(""))
+    }
+
 
 
 
