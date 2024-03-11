@@ -78,8 +78,6 @@ fun search(viewModel: CarsViewModel, navController: NavController) {
     val keyboardController = LocalSoftwareKeyboardController.current
 
     Column {
-
-
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -145,40 +143,6 @@ fun search(viewModel: CarsViewModel, navController: NavController) {
             }
         }
     }
-//    Column(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .padding(16.dp)
-//    ) {
-//        TextField(
-//            value = searchText,
-//            onValueChange = viewModel::onSearchTextChange,
-//            modifier = Modifier.fillMaxWidth(),
-//            placeholder = { Text(text = "Search") }
-//        )
-//        Spacer(modifier = Modifier.height(16.dp))
-//        if (isSearching) {
-//            Box(modifier = Modifier.fillMaxSize()) {
-//                CircularProgressIndicator(
-//                    modifier = Modifier.align(Alignment.Center)
-//                )
-//            }
-//        } else {
-//            LazyColumn(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .weight(1f)
-//            ) {
-//                items(
-//                    count = cars.size,
-//                    key = { index -> cars[index].id },
-//                    itemContent = { index ->
-//                        val car = cars[index]
-//                        CarListItem(car = car, navController = navController)
-//                    }
-//                )
-//            }
-//        }
-//    }
+
 
 }

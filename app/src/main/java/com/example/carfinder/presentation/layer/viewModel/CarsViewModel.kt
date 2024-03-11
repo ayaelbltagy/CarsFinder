@@ -21,25 +21,28 @@ import javax.inject.Inject
 @OptIn(FlowPreview::class)
 class CarsViewModel @Inject constructor(private val useCase: CarsUseCase) : ViewModel() {
     private val _searchText = MutableStateFlow("")
-    val searchText = _searchText.asStateFlow()
+    var searchText = _searchText.asStateFlow()
 
 
     init {
         getList()
     }
 
-    private fun getList(): List<ModelResponse> {
+    fun getList(): List<ModelResponse> {
         var list = emptyList<ModelResponse>()
         viewModelScope.launch {
-            list = useCase()
+            try {
+                list = useCase()
+            } catch (exception: Exception) {
+            }
         }
-        Log.i("list",list.size.toString())
+        Log.i("list", list.size.toString())
         return list
     }
 
     private val _cars = MutableStateFlow(getList())
 
-    val cars = searchText
+    var cars = searchText
         .debounce(500L)
         .onEach { }
         .combine(_cars) { text, response ->
